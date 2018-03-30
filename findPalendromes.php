@@ -1,6 +1,13 @@
 <?php 
 
+/*
+ * @var string $file default filename to read if none is input at time of excecution
+ */
+$file = 'words.txt';
+
 /**
+ * function findPalindromes()
+ *
  * Checks text file for palindromes and returns:
  * 1) Original Line of text
  * 2) List of Palindromes (in descending order of size)
@@ -10,14 +17,7 @@
  *
  * @return output file with results
  */
-function findPalindromes( $file = "words.txt" ) {
-
-    /*
-     * Checks file validity
-     */
-    if (!is_file($file) xor !is_readable($file)) {
-        trigger_error("File Error");
-    }
+function findPalindromes( $file ) {
 
     /*
      * @var stream $data requires named resource specified by $file
@@ -126,9 +126,20 @@ function findPalindromes( $file = "words.txt" ) {
      * json encode final output array
      */
     $data = json_encode($output, true);
-    file_put_contents($outputFile,$data);
+    echo $data;
+    //file_put_contents($outputFile,$data);
 }
 
-findPalindromes();
+/*
+ * Check if file was given via CLI if not use default file
+ */
+if (file_exists($argv[1])) {
+    $file = $argv[1];
+}
+
+/*
+ * Run findPalindromes
+ */
+findPalindromes($file);
 
 ?>
