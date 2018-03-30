@@ -19,6 +19,7 @@ $file = 'words.txt';
  */
 function findPalindromes( $file ) {
 
+
     /*
      * @var stream $data requires named resource specified by $file
      * @var timestamp $date used to append to output file
@@ -123,7 +124,7 @@ function findPalindromes( $file ) {
     fclose($data);
 
     /*
-     * json encode final output array
+     * JSON encode final output array
      */
     $data = json_encode($output, true);
     file_put_contents($outputFile,$data);
@@ -134,6 +135,14 @@ function findPalindromes( $file ) {
  */
 if (file_exists($argv[1])) {
     $file = $argv[1];
+}
+
+/*
+ * check if default file exists or die
+ */
+if (!file_exists($file)) {
+    echo 'No default file found'."\n";
+    die();
 }
 
 /*
