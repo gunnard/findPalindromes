@@ -26,6 +26,7 @@ function findPalindromes( $file = "words.txt" ) {
      * @var string $outputFile file where JSON data will be written
      * @var array $foundPalindromes placeholder for the found palindromes while in loop
      * @var string $testLine the single line being tested
+     * @var string $originalLine the unmodified line being tested from file
      * @var string $testString the partial line being tested
      * @var int $charCount the character count of found palindromes on a single line
      * @var int $mainCount main count moving along $testString
@@ -37,6 +38,7 @@ function findPalindromes( $file = "words.txt" ) {
     $output = array();
     $outputFile = 'output'.$date.'.txt';
     $foundPalindromes = array();
+    $originalLine = '';
     $testLine = '';
     $testString = '';
     $charCount = 0;
@@ -48,7 +50,8 @@ function findPalindromes( $file = "words.txt" ) {
      * while we are not at the end of the file, read it line-by-line and setting each line to $testLine 
      */
     while (!feof($data)) {
-        $testLine = fgets($data);
+        $originalLine = preg_replace( "/\r|\n/", "", fgets($data));
+        $testLine = $originalLine;
         if (strlen($testLine) != 0) {
 
             /* 
@@ -89,6 +92,7 @@ function findPalindromes( $file = "words.txt" ) {
                         if ($foundPalindrome == TRUE) {
                             $foundPalindromes[] = $testString;
                             $charCount += strlen($testString);
+                            break;
                         }//if foundPalindrome
                         unset($testString);
                     }//if strlen
@@ -101,7 +105,7 @@ function findPalindromes( $file = "words.txt" ) {
              */
             if (sizeof($foundPalindromes) > 0) {
                 array_multisort(array_map('strlen', $foundPalindromes),SORT_DESC, $foundPalindromes);
-                $output[] = array ( 'testLine' => $testLine , 'foundPalindromes' => $foundPalindromes , 'totalChars' => $charCount  );
+                $output[] = array ( 'originalLine' => $originalLine , 'foundPalindromes' => $foundPalindromes , 'totalChars' => $charCount  );
             }
 
             /*
@@ -122,7 +126,6 @@ function findPalindromes( $file = "words.txt" ) {
      * json encode final output array
      */
     $data = json_encode($output, true);
-
     file_put_contents($outputFile,$data);
 }
 
