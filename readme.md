@@ -7,8 +7,18 @@ A hospitality company (Pants inc.) wants to give away a prize each day to any us
 # Usage:
 `php findPalindromes.php filename (optional)`
 
-if no filename is given or the file does not exist, the default value for the file will come from `$file`
+* if no filename is given or the file does not exist, the default value for the file will come from `$file`
 
-the output will be a file with a date timestamp i.e.
+
+# Result:
+The output will be a file with a date timestamp.
 
 `output03-30-2018-15:05:24.txt`
+
+The expected data will be in JSON format.
+
+`[{
+	"originalLine": "mAyAyAm",
+	"foundPalindromes": ["mayayam", "aya", "aya", "yay"],
+	"totalChars": 16
+}]`

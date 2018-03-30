@@ -126,8 +126,7 @@ function findPalindromes( $file ) {
      * json encode final output array
      */
     $data = json_encode($output, true);
-    echo $data;
-    //file_put_contents($outputFile,$data);
+    file_put_contents($outputFile,$data);
 }
 
 /*
