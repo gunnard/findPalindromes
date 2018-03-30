@@ -13,7 +13,7 @@ A hospitality company (Pants inc.) wants to give away a prize each day to any us
 # Result:
 The output will be a file with a date timestamp.
 
-`output03-30-2018-15:05:24.txt`
+`output03-30-2018-160221.txt`
 
 The expected data will be in JSON format.
 

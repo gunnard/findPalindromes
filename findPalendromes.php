@@ -35,7 +35,7 @@ function findPalindromes( $file ) {
      * @var bool $foundPalindrome returns TRUE|FALSE if palindrome is found or not
      */ 
     $data = fopen($file,"r");
-    $date = date('m-d-Y-H:i:s');
+    $date = date('m-d-Y-His');
     $output = array();
     $outputFile = 'output'.$date.'.txt';
     $foundPalindromes = array();
